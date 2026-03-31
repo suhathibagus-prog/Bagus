@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Ahmad Bagus Rejeki | Portfolio Creative Technologist</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    :root {
+      --primary: #0f3b3c;
+      --primary-dark: #072526;
+      --accent: #2c7a6e;
+      --accent-light: #4ade80;
+      --bg-light: #f8fafc;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --white: #ffffff;
+      --shadow-soft: 0 10px 30px -10px rgba(0,0,0,0.07);
+      --shadow-strong: 0 20px 40px -15px rgba(15, 59, 60, 0.15);
+      --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg-light);
+      color: var(--text-main);
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    /* --- Animations --- */
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: var(--transition);
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* --- Navbar --- */
+    .navbar {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+      padding: 15px 0;
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 24px;
+    }
+
+    .logo {
+      font-weight: 800;
+      font-size: 1.5rem;
+      color: var(--primary);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-main);
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .nav-links a:after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -4px;
+      left: 0;
+      background: var(--accent);
+      transition: var(--transition);
+    }
+
+    .nav-links a:hover:after { width: 100%; }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* --- Hero Section --- */
+    .hero {
+      padding: 160px 0 100px;
+      background: radial-gradient(circle at top right, #e6f0f0, transparent);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      align-items: center;
+      gap: 60px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--white);
+      padding: 8px 16px;
+      border-radius: 100px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--accent);
+      box-shadow: var(--shadow-soft);
+      margin-bottom: 24px;
+      border: 1px solid rgba(44, 122, 110, 0.1);
+    }
+
+    .hero-content h1 {
+      font-size: 4rem;
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 20px;
+      background: linear-gradient(to right, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-desc {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      margin-bottom: 40px;
+      max-width: 540px;
+    }
+
+    .avatar-wrapper {
+      position: relative;
+      display: flex;
+      justify-content: center;
+    }
+
+    .avatar-circle {
+      width: 320px;
+      height: 320px;
+      background: var(--white);
+      border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow-strong);
+      animation: float 6s ease-in-out infinite;
+      border: 2px solid var(--accent);
+    }
+
+    .avatar-circle i {
+      font-size: 8rem;
+      color: var(--primary);
+    }
+
+    /* --- Buttons --- */
+    .btn {
+      padding: 14px 32px;
+      border-radius: 12px;
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: var(--transition);
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: var(--white);
+    }
+
+    .btn-primary:hover {
+      background: var(--accent);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(44, 122, 110, 0.3);
+    }
+
+    /* --- Cards (Hobbies & Projects) --- */
+    section { padding: 100px 24px; max-width: 1200px; margin: 0 auto; }
+
+    .section-header { margin-bottom: 60px; }
+    .section-title { font-size: 2.5rem; font-weight: 800; }
+    .title-line { 
+      width: 60px; height: 5px; background: var(--accent); 
+      margin-top: 15px; border-radius: 10px; 
+    }
+
+    .grid-layout {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+    }
+
+    .card {
+      background: var(--white);
+      padding: 40px 30px;
+      border-radius: 24px;
+      border: 1px solid rgba(0,0,0,0.03);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--shadow-strong);
+      border-color: var(--accent);
+    }
+
+    .card i {
+      font-size: 2.5rem;
+      color: var(--accent);
+      margin-bottom: 20px;
+      transition: var(--transition);
+    }
+
+    .card:hover i { transform: scale(1.1) rotate(-5deg); color: var(--primary); }
+
+    /* --- Projects Specific --- */
+    .project-card { padding: 0; overflow: hidden; }
+    .project-img-box {
+      height: 200px;
+      background: var(--primary-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(45deg, #e6f0f0, #ffffff);
+    }
+    .project-body { padding: 30px; }
+    .tag {
+      font-size: 0.7rem;
+      padding: 5px 12px;
+      background: #f1f5f9;
+      border-radius: 100px;
+      color: var(--primary);
+      font-weight: 700;
+      margin-right: 5px;
+    }
+
+    /* --- Form --- */
+    .contact-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      background: var(--white);
+      padding: 60px;
+      border-radius: 40px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 16px 20px;
+      border-radius: 12px;
+      border: 1px solid #e2e8f0;
+      background: #f8fafc;
+      margin-bottom: 20px;
+      font-family: inherit;
+      transition: var(--transition);
+    }
+
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      background: var(--white);
+      box-shadow: 0 0 0 4px rgba(44, 122, 110, 0.1);
+    }
+
+    /* --- Responsive --- */
+    @media (max-width: 992px) {
+      .hero-grid, .contact-container { grid-template-columns: 1fr; text-align: center; }
+      .hero-content h1 { font-size: 3rem; }
+      .hero-desc { margin-left: auto; margin-right: auto; }
+      .nav-links { display: none; } /* Mobile menu can be added later */
+      .avatar-circle { width: 250px; height: 250px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="#" class="logo">
+        <i class="fas fa-bolt"></i> A. Bagus Rejeki
+      </a>
+      <ul class="nav-links">
+        <li><a href="#home">Beranda</a></li>
+        <li><a href="#about">Tentang</a></li>
+        <li><a href="#projects">Proyek</a></li>
+        <li><a href="#contact">Kontak</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <section id="home" class="hero">
+      <div class="hero-grid">
+        <div class="hero-content reveal">
+          <span class="hero-badge"><i class="fas fa-microchip"></i> Creative Technologist</span>
+          <h1>HI! SAYA BAGUS</h1>
+          <p class="hero-desc">Halo! Saya Bagus, seorang DIY Enthusiast yang senang mengubah komponen elektronik mentah menjadi solusi cerdas yang fungsional.</p>
+          <div class="btn-group">
+            <a href="#projects" class="btn btn-primary">Lihat Portfolio <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+        <div class="avatar-wrapper reveal">
+          <div class="avatar-circle">
+            <i class="fas fa-user-astronaut"></i>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="section-header reveal">
+        <h2 class="section-title">Tentang Saya</h2>
+        <div class="title-line"></div>
+      </div>
+      <div class="card reveal" style="line-height: 1.8; font-size: 1.1rem;">
+        <p>Saya percaya bahwa <strong>inovasi terbaik lahir dari garasi</strong>. Dengan keahlian di bidang <em>embedded systems</em> dan kecintaan pada desain DIY, saya fokus menciptakan alat yang tidak hanya bekerja secara teknis, tapi juga memberikan pengalaman pengguna yang menyenangkan.</p>
+      </div>
+    </section>
+
+    <section id="hobbies">
+      <div class="grid-layout">
+        <div class="card reveal">
+          <i class="fas fa-microchip"></i>
+          <h3>Embedded Systems</h3>
+          <p>Eksperimen dengan ESP32, Arduino, dan kustom PCB design.</p>
+        </div>
+        <div class="card reveal">
+          <i class="fas fa-print"></i>
+          <h3>Rapid Prototyping</h3>
+          <p>Mewujudkan ide fisik melalui 3D Printing dan CAD design.</p>
+        </div>
+        <div class="card reveal">
+          <i class="fas fa-code"></i>
+          <h3>IoT Integration</h3>
+          <p>Menghubungkan hardware ke cloud untuk automasi cerdas.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="section-header reveal">
+        <h2 class="section-title">Proyek Unggulan</h2>
+        <div class="title-line"></div>
+      </div>
+      <div class="grid-layout">
+        <div class="card project-card reveal">
+          <div class="project-img-box"><i class="fas fa-fire-alt" style="font-size: 4rem;"></i></div>
+          <div class="project-body">
+            <h3>Smart Soldering</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin: 10px 0 20px;">Solder pintar berbasis PID dengan layar OLED.</p>
+            <div><span class="tag">STM32</span><span class="tag">C++</span></div>
+          </div>
+        </div>
+        <div class="card project-card reveal">
+          <div class="project-img-box"><i class="fas fa-leaf" style="font-size: 4rem;"></i></div>
+          <div class="project-body">
+            <h3>IoT Plant Monitor</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin: 10px 0 20px;">Monitoring kelembaban tanah otomatis via WiFi.</p>
+            <div><span class="tag">ESP8266</span><span class="tag">Blynk</span></div>
+          </div>
+        </div>
+        <div class="card project-card reveal">
+          <div class="project-img-box"><i class="fas fa-robot" style="font-size: 4rem;"></i></div>
+          <div class="project-body">
+            <h3>Robotic Arm</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin: 10px 0 20px;">Lengan robot 4-DOF dengan kontrol Bluetooth.</p>
+            <div><span class="tag">Arduino</span><span class="tag">Servo</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="contact-container reveal">
+        <div>
+          <h2 class="section-title">Mari Bicara Proyek</h2>
+          <p style="color: var(--text-muted); margin: 20px 0 40px;">Punya ide gila untuk dibangun bersama? Kirim pesan sekarang.</p>
+          <div style="display: flex; gap: 15px;">
+            <a href="#" class="btn btn-primary"><i class="fab fa-linkedin"></i></a>
+            <a href="#" class="btn btn-primary" style="background: #333;"><i class="fab fa-github"></i></a>
+          </div>
+        </div>
+        <form>
+          <input type="text" placeholder="Nama Lengkap" required>
+          <input type="email" placeholder="Email" required>
+          <textarea rows="5" placeholder="Pesan Anda"></textarea>
+          <button type="submit" class="btn btn-primary" style="width: 100%; border: none; cursor: pointer;">
+            Kirim Pesan <i class="fas fa-paper-plane"></i>
+          </button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer style="text-align: center; padding: 40px; color: var(--text-muted); font-size: 0.9rem;">
+    <p>&copy; 2026 Ahmad Bagus Rejeki. Dibuat dengan presisi teknis.</p>
+  </footer>
+
+  <script>
+    // Reveal animation on scroll
+    function reveal() {
+      var reveals = document.querySelectorAll(".reveal");
+      for (var i = 0; i < reveals.length; i++) {
+        var windowHeight = window.innerHeight;
+        var elementTop = reveals[i].getBoundingClientRect().top;
+        var elementVisible = 150;
+        if (elementTop < windowHeight - elementVisible) {
+          reveals[i].classList.add("active");
+        }
+      }
+    }
+
+    window.addEventListener("scroll", reveal);
+    // Trigger once on load
+    reveal();
+
+    // Smooth Scroll for links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+  </script>
+</body>
+</html>
